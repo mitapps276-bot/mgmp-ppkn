@@ -253,21 +253,16 @@ if($cek_landing && mysqli_num_rows($cek_landing) > 0){
             overflow: hidden;
         }
         .beranda-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
             z-index: 1;
-            animation: waveBg 8s ease-in-out infinite alternate;
+            filter: url('#flag-wave');
+            background-size: 100% 135% !important;
+            background-position: center center !important;
         }
         .beranda-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0, 33, 71, 0.8), rgba(0, 33, 71, 0.9));
+            background: linear-gradient(rgba(0, 33, 71, 0.6), rgba(0, 33, 71, 0.9));
             z-index: 2;
-        }
-        @keyframes waveBg {
-            0%   { transform: scale(1.1) translate(0%, 0%); }
-            25%  { transform: scale(1.1) translate(2%, 2%); }
-            50%  { transform: scale(1.1) translate(4%, 0%); }
-            75%  { transform: scale(1.1) translate(2%, -2%); }
-            100% { transform: scale(1.1) translate(0%, 0%); }
         }
         .hero-content { max-width: 900px; color: white; margin-top: -50px; position: relative; z-index: 3; }
         .hero-badge { 
@@ -461,6 +456,14 @@ $bg_pos_x = isset($ls['hero_image_x']) ? htmlspecialchars($ls['hero_image_x']) .
 $bg_pos_y = isset($ls['hero_image_y']) ? htmlspecialchars($ls['hero_image_y']) . '%' : '50%';
 ?>
 <section id="beranda">
+    <svg width="0" height="0" style="position:absolute;z-index:-1;">
+        <filter id="flag-wave">
+            <feTurbulence x="0" y="0" baseFrequency="0.01 0.02" numOctaves="3" seed="2">
+                <animate attributeName="baseFrequency" dur="8s" values="0.01 0.02;0.015 0.04;0.01 0.02" repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="25" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
     <div class="beranda-bg" style="background: url('<?= htmlspecialchars($ls['hero_image']); ?>') <?= $bg_pos_x; ?> <?= $bg_pos_y; ?>/100% 100% no-repeat; background-color: #002147;"></div>
     <div class="beranda-overlay"></div>
     <div class="hero-content">
