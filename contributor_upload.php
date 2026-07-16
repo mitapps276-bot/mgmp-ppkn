@@ -1309,7 +1309,7 @@ if(isset($_POST['upload'])){
             External Kolaborator
         </div>
         <div class="menu">
-            <a href="#" class="menu-disabled">Dashboard</a>
+            <a href="dashboard_contributor.php">Dashboard</a>
             <a href="data_materi.php">Data Materi</a>
             <a href="contributor_upload.php">Upload Materi</a>
             <a href="#" class="menu-disabled">Analytics</a>
@@ -1894,3 +1894,4 @@ if (isset($_GET['request_id']) && !empty($_GET['request_id'])) {
 ?>
 </body>
 </html>
+

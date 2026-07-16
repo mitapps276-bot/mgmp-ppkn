@@ -613,7 +613,7 @@ $folder_query = mysqli_query($conn, "
                 <a href="analytics.php">Analytics</a>
                 <a href="kelola_user.php">Kelola Akun</a>
             <?php } elseif($is_external){ ?>
-                <a href="#" class="menu-disabled">Dashboard</a>
+                <a href="dashboard_contributor.php">Dashboard</a>
                 <a href="data_materi.php">Data Materi</a>
                 <a href="contributor_upload.php">Upload Materi</a>
                 <a href="#" class="menu-disabled">Analytics</a>
@@ -1568,3 +1568,4 @@ window.onclick = function(event) {
 </script>
 </body>
 </html>
+
