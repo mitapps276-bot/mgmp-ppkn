@@ -1868,5 +1868,29 @@ if (hamburger && sidebar) {
             });
         </script>
     <?php } ?>
+<?php
+// Auto-fill from dashboard
+if (isset($_GET['request_id']) && !empty($_GET['request_id'])) {
+    $req_id = (int)$_GET['request_id'];
+    $stmt_auto = mysqli_prepare($conn, "SELECT jenis_request, deskripsi FROM material_requests WHERE id = ?");
+    mysqli_stmt_bind_param($stmt_auto, "i", $req_id);
+    mysqli_stmt_execute($stmt_auto);
+    $res_auto = mysqli_stmt_get_result($stmt_auto);
+    if ($row_auto = mysqli_fetch_assoc($res_auto)) {
+        $j = addslashes($row_auto['jenis_request']);
+        $kelas = "-";
+        $d = addslashes($row_auto['deskripsi']);
+        if (preg_match('/Target Kelas:\s*(.*?)\r?\nDetail Request:\s*(.*)/s', $row_auto['deskripsi'], $matches)) {
+            $kelas = addslashes(trim($matches[1]));
+            $d = addslashes(trim($matches[2]));
+        }
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                bantuRequest('$j', '$kelas', '$req_id', '$d');
+            });
+        </script>";
+    }
+}
+?>
 </body>
 </html>

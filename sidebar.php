@@ -22,7 +22,7 @@ $is_external = ($sidebar_role == 4);
             <a href="kelola_user.php">Kelola Akun</a>
             <a href="log_aktivitas.php">Log Aktivitas</a>
         <?php } elseif($is_external) { ?>
-            <a href="#" class="menu-disabled">Dashboard</a>
+            <a href="dashboard_contributor.php">Dashboard</a>
             <a href="data_materi.php">Data Materi</a>
             <a href="contributor_upload.php">Upload Materi</a>
             <a href="#" class="menu-disabled">Analytics</a>
@@ -62,3 +62,4 @@ $is_external = ($sidebar_role == 4);
     </div>
     <?php } ?>
 </div>
+

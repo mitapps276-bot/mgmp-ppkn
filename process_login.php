@@ -335,7 +335,7 @@ if($data){
         elseif($role_id == 4){
 
             header(
-                "Location:contributor_upload.php"
+                "Location:dashboard_contributor.php"
             );
 
             exit;
@@ -402,3 +402,4 @@ else{
 }
 
 ?>
+
