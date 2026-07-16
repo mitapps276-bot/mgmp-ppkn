@@ -636,18 +636,7 @@ $folder_query = mysqli_query($conn, "
 
     </h2>
 
-    <?php if($is_external){ ?>
-
-    <a
-        href="contributor_upload.php"
-        class="btn-contributor"
-    >
-
-        Upload Materi Kolaborator
-
-    </a>
-
-    <?php } ?>
+    
 
 </div>
 
@@ -1568,4 +1557,5 @@ window.onclick = function(event) {
 </script>
 </body>
 </html>
+
 
