@@ -783,6 +783,11 @@ if(isset($_POST['upload'])){
     >
 
     <style>
+        @keyframes spinLogo {
+            from { transform: perspective(600px) rotateY(0deg); }
+            to { transform: perspective(600px) rotateY(360deg); }
+        }
+        
 
         *{
             box-sizing:border-box;

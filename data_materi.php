@@ -216,6 +216,11 @@ $folder_query = mysqli_query($conn, "
     >
 
     <style>
+        @keyframes spinLogo {
+            from { transform: perspective(600px) rotateY(0deg); }
+            to { transform: perspective(600px) rotateY(360deg); }
+        }
+        
 
         *{
             box-sizing:border-box;
@@ -624,6 +629,9 @@ $folder_query = mysqli_query($conn, "
                 <a href="analytics.php">Analytics</a>
             <?php } ?>
             <a href="logout.php">Logout</a>
+        </div>
+        <div style="padding: 10px; margin-top: auto; text-align: center;">
+            <img src="Logo%20SI-LIAK.png" alt="Logo SI-LIAK" style="max-width: 95%; height: auto; opacity: 0.9; filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.5)); animation: spinLogo 12s linear infinite; transform-style: preserve-3d;">
         </div>
     </div>
 
