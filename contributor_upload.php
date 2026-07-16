@@ -474,10 +474,7 @@ if(isset($_POST['upload'])){
         trim($_POST['name'])
     );
 
-    $email = mysqli_real_escape_string(
-        $conn,
-        trim($_POST['email'])
-    );
+    $email = "";
 
     $institution = mysqli_real_escape_string(
         $conn,
@@ -489,10 +486,7 @@ if(isset($_POST['upload'])){
         trim($_POST['title'])
     );
 
-    $description = mysqli_real_escape_string(
-        $conn,
-        trim($_POST['description'])
-    );
+    $description = "";
 
     // =====================================
     // AUTO VALUE
@@ -1369,10 +1363,7 @@ if(isset($_POST['upload'])){
                 <label>Nama Lengkap</label>
                 <input type="text" name="name" class="form-control" required>
             </div>
-            <div>
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" required>
-            </div>
+            
             <div>
                 <label>Sekolah / Instansi</label>
                 <input type="text" name="institution" class="form-control" required>
@@ -1403,8 +1394,7 @@ if(isset($_POST['upload'])){
             </div>
         </div>
 
-        <label>Deskripsi / Catatan Tambahan (Boleh kosong)</label>
-        <textarea name="description" class="form-control" placeholder="Tulis catatan..."></textarea>
+        
 
         <label>Pilih File Materi</label>
 
