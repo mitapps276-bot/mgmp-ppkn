@@ -24,3 +24,17 @@ error_log
 
 # Archive & zip (jangan commit file besar)
 *.zip
+
+# ============================================
+# FILE TESTING LOKAL — Jangan pernah di-push!
+# Boleh dibuat di lokal untuk testing ngrok,
+# tapi tidak akan ikut ke server live.
+# ============================================
+test_*.php
+fix_*.php
+temp_*.php
+temp_*.html
+restore_*.sql
+restore_*.txt
+*_debug.php
+*_test.php

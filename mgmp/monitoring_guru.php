@@ -411,74 +411,6 @@ $top_guru_data = mysqli_fetch_assoc($top_guru);
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-/* Tabel khusus cetak disembunyikan di layar */
-.print-only-table { display: none; }
-
-@media print {
-    /* Sembunyikan semua elemen UI */
-    .sidebar, .mobile-nav, .page-header, .subtitle, .top-grid, .info-card, .top-card, .empty-top, .formula-box, .system-status, form, .search-box, .carousel-btn, .accordion-header, .carousel-wrapper { 
-        display: none !important; 
-    }
-    
-    /* Reset struktur layout yang bisa merusak halaman print */
-    html, body, .wrapper, .main-content, .container, .card, .accordion-card, .accordion-body {
-        display: block !important;
-        height: auto !important;
-        min-height: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        background: transparent !important;
-        border: none !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        float: none !important;
-        position: static !important;
-    }
-    
-    /* Header Cetak */
-    .print-header { 
-        display: flex !important; 
-        align-items: center !important; 
-        justify-content: center !important; 
-        gap: 20px !important; 
-        text-align: center !important; 
-        margin-bottom: 15px !important; 
-        padding-bottom: 10px !important; 
-        border-bottom: 2px solid #000 !important; 
-    }
-    
-    /* Perbaikan Carousel dan Tabel */
-    .table-carousel-list { display: block !important; overflow: visible !important; height: auto !important; }
-    .table-carousel-item { flex: none !important; display: block !important; width: 100% !important; margin-bottom: 0 !important; page-break-inside: auto !important; }
-    
-    /* Tabel Utuh Khusus Cetak */
-    .print-only-table { display: block !important; page-break-inside: auto !important; margin-bottom: 20px; }
-    .print-only-table table thead { display: table-row-group !important; } /* Mencegah duplikasi Chrome */
-    
-    /* Perbaikan Kolom Tabel Terpotong dan Bug Header Ganda Chrome */
-    .table-responsive { overflow: visible !important; display: block !important; }
-    table { width: 100% !important; max-width: 100% !important; table-layout: auto !important; page-break-inside: auto !important; }
-    tr { page-break-inside: avoid !important; page-break-after: auto !important; }
-    
-    /* Pengecilan Font dan Padding agar muat 10 kolom di kertas A4 */
-    th, td { 
-        font-size: 9pt !important; 
-        padding: 4px 3px !important; 
-        white-space: normal !important; 
-        word-wrap: break-word !important; 
-    }
-    
-    /* Sembunyikan Progress Bar untuk menghemat ruang kolom */
-    td .progress { display: none !important; }
-    td strong { font-size: 9.5pt !important; }
-    
-    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-    
-    /* Menghilangkan Header (Tanggal) dan Footer (URL/Halaman) bawaan Browser */
-    @page { margin: 0; size: landscape; }
-    body { padding: 1cm 1.5cm !important; }
-}
-.print-header { display: none; }
 
 body{
 
@@ -491,30 +423,8 @@ body{
 .wrapper{ display:flex; min-height:100vh; }
 .sidebar{ width:250px; height:100vh; background:#2c3e50; position:sticky; top:0; align-self:flex-start; overflow-y:auto; flex-shrink:0; }
 .sidebar .logo{ color:white; text-align:center; padding:30px; font-size:24px; font-weight:bold; border-bottom:1px solid rgba(255,255,255,0.1); }
-.sidebar .menu {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.sidebar .menu a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    padding: 14px 20px;
-    background: transparent;
-    border-radius: 12px;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
-    font-size: 15px;
-    font-weight: bold;
-}
-.sidebar .menu a:hover, .sidebar .menu a[style*="background"] {
-    background: #3498db !important;
-    transform: translateX(5px);
-    border-color: #2980b9;
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
-}
+.sidebar .menu a{ display:block; color:white; text-decoration:none; padding:18px 25px; transition:0.3s; font-size:16px; }
+.sidebar .menu a:hover{ background:#34495e; }
 .main-content{ flex:1; min-width:0; }
 
 .container{
@@ -793,22 +703,6 @@ table td{
 
 }
 
-/* Rapikan kolom teks (Rank, Guru, Sekolah) menjadi rata kiri */
-table th:nth-child(1), table td:nth-child(1),
-table th:nth-child(2), table td:nth-child(2),
-table th:nth-child(3), table td:nth-child(3) {
-    text-align: left !important;
-}
-
-/* Rapikan kolom angka (Upload, Download, Login, Skor Aktivitas) dan Status menjadi rata tengah */
-table th:nth-child(4), table td:nth-child(4),
-table th:nth-child(5), table td:nth-child(5),
-table th:nth-child(6), table td:nth-child(6),
-table th:nth-child(7), table td:nth-child(7),
-table th:nth-child(8), table td:nth-child(8) {
-    text-align: center !important;
-}
-
 table tr:hover{
 
     background:#fafafa;
@@ -1043,7 +937,48 @@ CAROUSEL TABLE
     .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 
+/* ======================
+   PRINT STYLES
+====================== */
+@media print {
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        background: white !important;
+    }
+    .sidebar { display: none !important; }
+    .mobile-nav { display: none !important; }
+    .main-content { width: 100% !important; padding: 0 !important; margin: 0 !important; }
+    .wrapper { display: block !important; }
+    .btn-print { display: none !important; }
+    .search-box { display: none !important; }
+    .carousel-btn { display: none !important; }
+    .table-carousel-list { display: block !important; overflow: visible !important; }
+    .table-carousel-item { display: block !important; margin-bottom: 20px !important; }
+    .accordion-body { display: block !important; }
+    .accordion-header::after { display: none !important; }
+    
+    /* Memastikan tabel tampil penuh di PDF */
+    .table-container { overflow: visible !important; width: 100% !important; }
+    table { width: 100% !important; page-break-inside: auto; }
+    tr { page-break-inside: avoid; page-break-after: auto; }
+    
+    /* Membuat Grid menjadi Block agar menyusun ke bawah di kertas A4 */
+    .top-grid, .analytics-chart-wrap, .range-chart-wrap {
+        display: block !important;
+        width: 100% !important;
+    }
 
+    .card, .info-card, .formula-box, .top-card, .accordion-card, .chart-card { 
+        width: 100% !important;
+        box-shadow: none !important; 
+        border: 1px solid #ccc !important; 
+        page-break-inside: avoid; 
+        margin-bottom: 20px !important; 
+    }
+    .top-card { background: white !important; color: #2c3e50 !important; border: 2px solid #1abc9c !important; }
+    .top-card h1, .top-card p, .top-card h2 { color: #2c3e50 !important; }
+}
 
 </style>
 
@@ -1334,17 +1269,6 @@ CAROUSEL TABLE
         
         <div class="accordion-body" style="display: block;">
 
-        <!-- HEADER RESMI UNTUK CETAK -->
-        <div class="print-header">
-            <img src="assets/images/logo.png" alt="Logo Si-Liak" style="width: 80px; height: auto;">
-            <div>
-                <h2 style="margin: 0; font-size: 18pt; color: #2c3e50;">Laporan Monitoring Aktivitas Guru</h2>
-                <p style="margin: 5px 0; font-size: 12pt; color: #444;">MGMP Platform</p>
-                <p style="margin: 0; font-size: 10pt; color: #666;">Dicetak pada: <?= date('d M Y H:i') ?></p>
-            </div>
-        </div>
-        <!-- END HEADER RESMI -->
-
         <form method="GET">
 
             <div class="search-box">
@@ -1369,17 +1293,53 @@ CAROUSEL TABLE
         while($row = mysqli_fetch_assoc($monitoring)){
             $monitoring_data[] = $row;
         }
-        
-        // Render semua baris ke dalam array HTML terlebih dahulu
-        $row_htmls = [];
-        $no = 1;
-        foreach($monitoring_data as $row){
-            ob_start();
-            $skor = $row['skor_aktivitas'];
+        $chunks = array_chunk($monitoring_data, 5); // Pisahkan 5 baris per halaman
+        ?>
 
-            // =================================
-            // STATUS GURU
-            // =================================
+        <div class="carousel-wrapper">
+            <button class="carousel-btn prev" onclick="scrollCarousel(-1, 'guruTableCarousel')">&#10094;</button>
+            <button class="carousel-btn next" onclick="scrollCarousel(1, 'guruTableCarousel')">&#10095;</button>
+            
+            <div class="table-carousel-list" id="guruTableCarousel">
+                <?php
+                $no = 1;
+                if(count($chunks) > 0){
+                    foreach($chunks as $chunk){
+                ?>
+                <div class="table-carousel-item">
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Rank</th>
+                                    <th>Guru</th>
+                                    <th>Sekolah</th>
+                                    <th>Upload</th>
+                                    <th>Download</th>
+                                    <th>Login</th>
+                                    <th>Skor Aktivitas</th>
+                                    <th>Status</th>
+                                    <th>Aktivitas Terakhir</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                            <?php
+                            foreach($chunk as $row){
+
+                    $skor =
+                    $row['skor_aktivitas'];
+
+                    // =================================
+                    // STATUS GURU
+                    // =================================
 
                     if($skor >= 50){
 
@@ -1421,21 +1381,6 @@ CAROUSEL TABLE
 
                     }
 
-                    $up = (int)$row['total_upload'];
-                    $dl = (int)$row['total_download'];
-                    $rekom = "";
-                    if($up == 0){
-                        $rekom = "Belum pernah upload materi. Disarankan mulai berbagi.";
-                    } elseif($up <= 3){
-                        $rekom = "Aktivitas mulai berkembang. Disarankan tingkatkan upload.";
-                    } elseif($dl <= 5){
-                        $rekom = "Materi aktif diupload, tingkat download rendah.";
-                    } elseif($no <= 3){ 
-                        $rekom = "Termasuk kolaborator utama. Pertahankan kualitas.";
-                    } else {
-                        $rekom = "Aktivitas sudah cukup baik. Pertahankan konsistensi.";
-                    }
-
                     $persen =
                     min(100, $skor);
 
@@ -1452,7 +1397,14 @@ CAROUSEL TABLE
                     </td>
 
                     <td>
-                        <strong><?= htmlspecialchars($row['full_name']); ?></strong>
+
+                        <strong>
+
+                            <?= htmlspecialchars(
+                                $row['full_name']
+                            ); ?>
+
+                        </strong>
 
                         <br>
 
@@ -1547,12 +1499,6 @@ CAROUSEL TABLE
                     </td>
 
                     <td>
-                        <small style="color:#666; font-style:italic; line-height:1.4; display:block;">
-                            <?= $rekom; ?>
-                        </small>
-                    </td>
-
-                    <td>
 
                         <?php
 
@@ -1592,44 +1538,12 @@ CAROUSEL TABLE
 
                 </tr>
 
-            <?php 
-                $row_htmls[] = ob_get_clean();
-            } 
-            
-            $chunks = array_chunk($row_htmls, 5); 
-            ?>
+                <?php } ?>
 
-        <!-- LAYAR: Carousel Table -->
-        <div class="carousel-wrapper d-print-none">
-            <button class="carousel-btn prev" onclick="scrollCarousel(-1, 'guruTableCarousel')">&#10094;</button>
-            <button class="carousel-btn next" onclick="scrollCarousel(1, 'guruTableCarousel')">&#10095;</button>
-            
-            <div class="table-carousel-list" id="guruTableCarousel">
-                <?php
-                if(count($chunks) > 0){
-                    foreach($chunks as $chunk){
-                ?>
-                <div class="table-carousel-item">
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="text-align: left !important; min-width: 50px;">Rank</th>
-                                    <th style="text-align: left !important; min-width: 200px;">Nama Guru</th>
-                                    <th style="text-align: left !important;">Sekolah</th>
-                                    <th>Upload</th>
-                                    <th>Download</th>
-                                    <th>Login</th>
-                                    <th>Skor Aktivitas</th>
-                                    <th>Status</th>
-                                    <th>Rekomendasi Sistem</th>
-                                    <th>Aktivitas Terakhir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php echo implode('', $chunk); ?>
                             </tbody>
+
                         </table>
+
                     </div>
                 </div>
                 <?php } } else { ?>
@@ -1658,49 +1572,6 @@ CAROUSEL TABLE
                     </div>
                 </div>
                 <?php } ?>
-            </div>
-        </div>
-
-        <!-- CETAK: Tabel Utuh -->
-        <div class="d-none d-print-block print-only-table">
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="text-align: left !important; min-width: 50px;">Rank</th>
-                            <th style="text-align: left !important; min-width: 200px;">Nama Guru</th>
-                            <th style="text-align: left !important;">Sekolah</th>
-                            <th>Upload</th>
-                            <th>Download</th>
-                            <th>Login</th>
-                            <th>Skor Aktivitas</th>
-                            <th>Status</th>
-                            <th>Rekomendasi Sistem</th>
-                            <th>Aktivitas Terakhir</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        if(count($row_htmls) > 0){
-                            echo implode('', $row_htmls);
-                        } else {
-                        ?>
-                        <tr>
-                            <td colspan="10" style="text-align:center; padding:30px; color:#7f8c8d;">Tidak ada data guru yang ditemukan.</td>
-                        </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- TANDA TANGAN -->
-            <div style="margin-top: 30px; text-align: right; font-size: 10pt; color: #000; page-break-inside: avoid; padding-right: 20px;">
-                <p style="margin: 0;">Denpasar, <?php 
-                    $bulan = array(1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
-                    echo date('d') . ' ' . $bulan[(int)date('m')] . ' ' . date('Y');
-                ?></p>
-                <p style="margin: 2px 0 70px 0;">Ketua MGMP PPKn Kota Denpasar</p>
-                <p style="margin: 0; display: inline-block; border-bottom: 1px solid #000; width: 250px;"></p>
             </div>
         </div>
 
@@ -1906,6 +1777,6 @@ function handlePrintOrDownload() {
     }
 }
 </script>
+
 </body>
 </html>
-

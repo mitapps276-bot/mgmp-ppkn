@@ -59,19 +59,7 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # 4. PROTEKSI FILE SENSITIF
 #    Mencegah akses langsung ke file berbahaya
 # --------------------------------------------------------------
-<FilesMatch "\.(sql|log|env|git|gitignore|md|json|lock|bak|swp|tmp|txt|zip)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-# Blokir eksplisit file debug & backup berbahaya
-<FilesMatch "^(test_|fix_|temp_|restore_|ngrok_)">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-# Blokir file arsip/backup zip
-<FilesMatch "\.(zip|tar|gz|rar|7z)$">
+<FilesMatch "\.(sql|log|env|git|gitignore|md|json|lock|bak|swp|tmp)$">
     Order allow,deny
     Deny from all
 </FilesMatch>

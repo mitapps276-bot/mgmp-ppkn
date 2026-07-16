@@ -591,29 +591,12 @@ while($row = mysqli_fetch_assoc($cross_school_query)){
             color:white; text-align:center; padding:30px;
             font-size:24px; font-weight:bold; border-bottom:1px solid rgba(255,255,255,0.1);
         }
-        .sidebar .menu {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .sidebar .menu a{
+            display:block; color:white; text-decoration:none;
+            padding:18px 25px; transition:0.3s; font-size:16px;
         }
-        .sidebar .menu a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 14px 20px;
-            background: transparent;
-            border-radius: 12px;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            font-size: 15px;
-            font-weight: bold;
-        }
-        .sidebar .menu a:hover, .sidebar .menu a[style*="background"] {
-            background: #3498db !important;
-            transform: translateX(5px);
-            border-color: #2980b9;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        .sidebar .menu a:hover{
+            background:#34495e;
         }
 
         .content{
@@ -1266,87 +1249,34 @@ while($row = mysqli_fetch_assoc($cross_school_query)){
         }
 
         /* ======================
-           PRINT STYLES (Efisiensi Kertas)
+           PRINT STYLES
         ====================== */
         @media print {
-            @page { margin: 0; size: portrait; }
             body {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 background: white !important;
-                font-family: Arial, sans-serif !important;
-                color: #000 !important;
-                padding: 10mm !important;
             }
-            .sidebar, .mobile-nav, .hero, .summary-grid, .section-grid, .accordion-card, .btn-print, .cs-wrapper, .carousel-btn { 
-                display: none !important; 
-            }
+            .sidebar { display: none !important; }
             .content { width: 100% !important; padding: 0 !important; margin: 0 !important; }
             .wrapper { display: block !important; }
+            .btn-print { display: none !important; }
+            .accordion-body { display: block !important; }
+            .accordion-header::after { display: none !important; }
+            .carousel-btn { display: none !important; }
+            .ai-school-list { display: block !important; overflow: visible !important; }
+            .ai-school { page-break-inside: avoid; margin-bottom: 20px !important; }
+            .card, .accordion-card { box-shadow: none !important; border: 1px solid #ccc !important; margin-bottom: 20px !important; page-break-inside: avoid; }
+            .ranking, .ai-metric, .ai-box { page-break-inside: avoid; border: 1px solid #ccc !important; }
+            .hero { background: white !important; color: #2c3e50 !important; border: 2px solid #2c3e50 !important; }
+            .hero h1, .hero p { color: #2c3e50 !important; }
+            [id^="req_"] { display: flex !important; flex-wrap: wrap !important; overflow: visible !important; }
+            .req-card-item { flex: 0 0 calc(50% - 10px) !important; margin-bottom: 10px; page-break-inside: avoid; border: 1px solid #ccc !important; }
             
-            .print-only-table { 
-                display: block !important; 
-            }
-            .print-header { 
-                display: flex !important; 
-                align-items: center; 
-                gap: 15px; 
-                border-bottom: 2px solid #000 !important; 
-                padding-bottom: 5px; 
-                margin-bottom: 8px; 
-            }
-            .print-summary {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 8px;
-                border: 1px solid #000;
-                padding: 5px;
-                page-break-inside: avoid;
-            }
-            .print-summary-item {
-                text-align: center;
-                flex: 1;
-                border-right: 1px solid #ccc;
-            }
-            .print-summary-item:last-child {
-                border-right: none;
-            }
-            .print-summary-item h3 { margin: 0; font-size: 8pt; color: #555; }
-            .print-summary-item h1 { margin: 0; font-size: 11pt; color: #000; }
-            
-            .print-table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 8px;
-                font-size: 8pt;
-            }
-            .print-table th, .print-table td {
-                border: 1px solid #000;
-                padding: 2px 3px !important;
-                vertical-align: top;
-            }
-            .print-table th {
-                background: #f4f6f9 !important;
-                font-weight: bold;
-            }
-            .print-section-title {
-                font-size: 9.5pt;
-                font-weight: bold;
-                margin: 0 0 3px;
-                color: #000;
-                text-transform: uppercase;
-            }
-            
-            .print-trend {
-                border: 1px solid #000;
-                padding: 5px;
-                font-size: 8pt;
-                margin-bottom: 8px;
-                page-break-inside: avoid;
-            }
+            /* Peta Kolaborasi Print Styles */
+            .cs-box { border: 1px solid #ddd !important; background: white !important; page-break-inside: avoid; }
+            .cs-recommendation { border: 1px solid #ddd !important; background: white !important; page-break-inside: avoid; }
         }
-        
-        .print-only-table { display: none; }
 
         /* Peta Kolaborasi Base Styles */
         .cs-wrapper { display: flex; gap: 15px; flex-wrap: wrap; }
@@ -1953,152 +1883,6 @@ while($row = mysqli_fetch_assoc($cross_school_query)){
                 <?php } ?>
             </div>
         </section>
-
-    <!-- CETAK: Laporan Analytics -->
-    <div class="d-none d-print-block print-only-table">
-        <!-- HEADER RESMI UNTUK CETAK -->
-        <div class="print-header">
-            <img src="assets/images/logo.png" alt="Logo Si-Liak" style="width: 60px; height: auto;">
-            <div>
-                <h2 style="margin: 0; font-size: 14pt; color: #000;">Laporan Analytics Kolaborasi MGMP</h2>
-                <p style="margin: 2px 0; font-size: 9pt; color: #444;">MGMP Platform</p>
-                <p style="margin: 0; font-size: 8pt; color: #666;">Dicetak pada: <?= date('d M Y H:i') ?></p>
-            </div>
-        </div>
-
-        <!-- RINGKASAN DATA -->
-        <div class="print-summary">
-            <div class="print-summary-item"><h3>Total Guru</h3><h1><?= number_format($total_guru); ?></h1></div>
-            <div class="print-summary-item"><h3>Total Materi</h3><h1><?= number_format($total_upload_approved_internal); ?></h1></div>
-            <div class="print-summary-item"><h3>Total Download</h3><h1><?= number_format($total_download); ?></h1></div>
-            <div class="print-summary-item"><h3>Total Login</h3><h1><?= number_format($total_login); ?></h1></div>
-            <div class="print-summary-item"><h3>Skor Sistem</h3><h1><?= number_format($total_system_score); ?></h1></div>
-        </div>
-
-        <div style="display: flex; gap: 15px; page-break-inside: avoid;">
-            <!-- GURU TERAKTIF -->
-            <div style="flex: 1;">
-                <div class="print-section-title">5 Guru Teraktif</div>
-                <table class="print-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 25px; text-align: center;">No</th>
-                            <th style="text-align: left;">Nama Guru</th>
-                            <th style="text-align: left;">Sekolah</th>
-                            <th style="text-align: center;">Skor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        mysqli_data_seek($leaderboard, 0);
-                        $rank = 1;
-                        while($row = mysqli_fetch_assoc($leaderboard)){ 
-                        ?>
-                        <tr>
-                            <td style="text-align: center;"><?= $rank; ?></td>
-                            <td><?= e($row['full_name']); ?></td>
-                            <td><?= e($row['school_name']); ?></td>
-                            <td style="text-align: center; font-weight: bold;"><?= number_format($row['nilai_partisipasi']); ?></td>
-                        </tr>
-                        <?php $rank++; } ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- MATERI TERPOPULER -->
-            <div style="flex: 1;">
-                <div class="print-section-title">5 Materi Terpopuler</div>
-                <table class="print-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 25px; text-align: center;">No</th>
-                            <th style="text-align: left;">Judul Materi</th>
-                            <th style="text-align: left;">Author</th>
-                            <th style="text-align: center;">Unduhan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        mysqli_data_seek($materi_populer, 0);
-                        $rank_mat = 1;
-                        while($row = mysqli_fetch_assoc($materi_populer)){ 
-                        ?>
-                        <tr>
-                            <td style="text-align: center;"><?= $rank_mat; ?></td>
-                            <td><?= e($row['title']); ?></td>
-                            <td><?= e($row['author_name']); ?></td>
-                            <td style="text-align: center; font-weight: bold;"><?= number_format($row['total_download']); ?></td>
-                        </tr>
-                        <?php $rank_mat++; } ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- KINERJA KOLEKTIF & INTELEGENSI SEKOLAH (SPI & KSI) -->
-        <div class="print-section-title" style="margin-top: 10px;">Kinerja Kolektif & Intelegensi Sekolah (SPI & KSI)</div>
-        <table class="print-table">
-            <thead>
-                <tr>
-                    <th style="width: 25px; text-align: center;">No</th>
-                    <th style="text-align: left;">Nama Sekolah</th>
-                    <th style="text-align: center;">Skor SPI</th>
-                    <th style="text-align: left;">Status (SPI)</th>
-                    <th style="text-align: center;">Skor KSI</th>
-                    <th style="text-align: left;">Status (KSI)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                mysqli_data_seek($school_analytics, 0);
-                $s_rank = 1;
-                while($school = mysqli_fetch_assoc($school_analytics)){ 
-                    $school_score = (int)$school['total_score'];
-                    $ai = school_intelligence($school, $POINT_UPLOAD, $POINT_DOWNLOAD, $POINT_LOGIN);
-                    
-                    if($school_score >= 100) {
-                        $spi_status = 'Sangat Tinggi';
-                    } elseif($school_score >= 50) {
-                        $spi_status = 'Tinggi';
-                    } elseif($school_score >= 20) {
-                        $spi_status = 'Sedang';
-                    } elseif($school_score > 0) {
-                        $spi_status = 'Rendah';
-                    } else {
-                        $spi_status = 'Tidak Aktif';
-                    }
-                ?>
-                <tr>
-                    <td style="text-align: center;"><?= $s_rank; ?></td>
-                    <td><?= e($school['school_name']); ?></td>
-                    <td style="text-align: center; font-weight: bold;"><?= number_format($school_score); ?></td>
-                    <td><?= $spi_status; ?></td>
-                    <td style="text-align: center; font-weight: bold;"><?= round($ai['score_per_guru'], 2); ?></td>
-                    <td><?= e($ai['status']); ?></td>
-                </tr>
-                <?php $s_rank++; } ?>
-            </tbody>
-        </table>
-
-        <!-- TREN AKTIVITAS -->
-        <div class="print-section-title" style="margin-top: 10px;">Tren Aktivitas Bulanan</div>
-        <div class="print-trend">
-            <strong>Status: <?= e($trend_analysis['status']); ?></strong><br>
-            <?= $trend_analysis['insight']; ?><br>
-            <em style="display:inline-block; margin-top:4px;">Rekomendasi: <?= $trend_analysis['recommendation']; ?></em>
-        </div>
-
-        <!-- TANDA TANGAN -->
-        <div style="margin-top: 15px; text-align: right; font-size: 9pt; color: #000; page-break-inside: avoid; padding-right: 20px;">
-            <p style="margin: 0;">Denpasar, <?php 
-                $bulan = array(1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
-                echo date('d') . ' ' . $bulan[(int)date('m')] . ' ' . date('Y');
-            ?></p>
-            <p style="margin: 2px 0 70px 0;">Ketua MGMP PPKn Kota Denpasar</p>
-            <p style="margin: 0; display: inline-block; border-bottom: 1px solid #000; width: 250px;"></p>
-        </div>
-    </div>
-
 </main>
 
 <?php if(count($label_trend) > 0){ ?>
@@ -2195,4 +1979,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
